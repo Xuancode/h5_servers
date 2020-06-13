@@ -1,17 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="/css/init.css">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title></title>
+  <script>
+    fnResize()
+    window.onresize = function () {
+      fnResize()
+    }
+    function fnResize() {
+      var deviceWidth = document.documentElement.clientWidth || window.innerWidth
+      // if (deviceWidth >= 750) {
+      //   deviceWidth = 750
+      // }
+      // if (deviceWidth <= 320) {
+      //   deviceWidth = 320
+      // }
+      document.documentElement.style.fontSize = (deviceWidth / 7.5 * 2) + 'px'
+    }
+  </script>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+      Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+<script>
+  // function isIos() {//判断是IOS还是Android
+  //   var userAgent = navigator.userAgent 
+  //   var isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1  //android终端
+  //   var isiOS = !!userAgent.match(/\(i[^ ]+ ( U )? CPU.+Mac OS X/)  //ios终端
+  //   if (isAndroid) {
+  //     return false 
+  //   } else if (isiOS) {
+  //     return true 
+  //   }
+  // }
+  // if (isIos()) {
+  //   var isPageHide = false 
+  //   window.addEventListener('pageshow', function () {
+  //     if (isPageHide) {
+  //       window.location.reload() 
+  //     }
+  //   }) 
+  //   window.addEventListener('pagehide', function () {
+  //     isPageHide = true 
+  //   }) 
+  // } else {
+  //   var needRefresh = sessionStorage.getItem("need-refresh")
+  //   if (needRefresh) {
+  //     // sessionStorage.removeItem("need-refresh)
+  //     window.location.reload()
+  //   }
+  // }
+</script>
+
 </html>
