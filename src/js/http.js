@@ -2,16 +2,16 @@
  * @Author: xuanpl
  * @Date: 2020-03-23 21:46:02
  * @LastEditors: xuanpl
- * @LastEditTime: 2020-06-13 18:44:31
+ * @LastEditTime: 2020-06-16 19:28:31
  * @Description: file content
- * @FilePath: /happy_battle/src/js/http.js
+ * @FilePath: /h5_servers/src/js/http.js
  */
 import axios from 'axios'
 import { getCookie } from '@/js/util'
 import weui from 'weui.js'
 
-axios.defaults.timeout = 5000;
-axios.defaults.baseURL = 'http://192.168.1.104:7001'; //测试环境
+axios.defaults.timeout = 5000
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API
 let Content_Type = 'application/json;charset=utf-8';
 
 //http request 拦截器，通过这个，把token传到后台

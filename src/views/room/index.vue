@@ -1,3 +1,11 @@
+<!--
+ * @Author: xuanpl
+ * @Date: 2020-06-16 08:29:15
+ * @LastEditors: xuanpl
+ * @LastEditTime: 2020-06-16 19:28:09
+ * @Description: file content
+ * @FilePath: /h5_servers/src/views/room/index.vue
+--> 
 <template>
   <div class="room">
     <div class="focus" @click="goWST" v-if="canSee==0">
