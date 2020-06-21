@@ -2,7 +2,7 @@
  * @Author: xuanpl
  * @Date: 2020-06-16 08:29:15
  * @LastEditors: xuanpl
- * @LastEditTime: 2020-06-21 22:44:04
+ * @LastEditTime: 2020-06-21 22:54:08
  * @Description: 新增公寓的页面
  * @FilePath: /h5_servers/src/views/building/add.vue
 -->
@@ -176,9 +176,9 @@ export default {
           noCompressIfLarger: true, // 为 true 时如果发现压缩后图片大小比原来还大，则返回源图片
         }
         // 压缩
-        // let tinyRes = await Qiniu.compressImage(blobArr[i], options)
-        // tinyRes = tinyRes.dist
-        let tinyRes = blobArr[i]
+        let tinyRes = await Qiniu.compressImage(blobArr[i], options)
+        tinyRes = tinyRes.dist
+        // let tinyRes = blobArr[i]
         // 转化为base64作缩略图
         let reader = new FileReader() // 此处用var会有bug，改为let即可
         reader.onload = function() {
@@ -236,12 +236,9 @@ export default {
     commit() {
       this.imgUploadCount = 0 // 重置图片上传计数
       this.loadingEle = this.$weui.loading('loading')
-      setTimeout(() => {
-        this.loadingEle.hide()
-      }, 5000)
       // 先上传图片到七牛云
       for (let i = 0; i < this.imgArr.length; i++) {
-        const ele = this.imgArr[i]
+        const ele = this.imgArr[i]['file']
         this.uploadFile(ele, i, this.imgNameArr[i])
       }
     },
