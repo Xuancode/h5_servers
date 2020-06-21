@@ -2,7 +2,7 @@
  * @Author: xuanpl
  * @Date: 2020-03-23 21:46:02
  * @LastEditors: xuanpl
- * @LastEditTime: 2020-06-16 19:28:31
+ * @LastEditTime: 2020-06-17 16:19:55
  * @Description: file content
  * @FilePath: /h5_servers/src/js/http.js
  */
@@ -12,41 +12,47 @@ import weui from 'weui.js'
 
 axios.defaults.timeout = 5000
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API
-let Content_Type = 'application/json;charset=utf-8';
+let Content_Type = 'application/json;charset=utf-8'
 
 //http request 拦截器，通过这个，把token传到后台
-axios.interceptors.request.use(config => {
-  let token = getCookie('X-token')
-  config.headers = {
-    'Content-Type': Content_Type,
-    'Authorization': `Bearer ${token}`
-  };
-  return config;
-}, err => {
-  return Promise.reject(err)
-})
+axios.interceptors.request.use(
+  (config) => {
+    let token = getCookie('X-token')
+    config.headers = {
+      'Content-Type': Content_Type,
+      Authorization: `Bearer ${token}`,
+    }
+    return config
+  },
+  (err) => {
+    return Promise.reject(err)
+  }
+)
 
 // http response 拦截器
-axios.interceptors.response.use(response => {
-  const res = response.data
+axios.interceptors.response.use(
+  (response) => {
+    const res = response.data
 
-  // if the custom code is not 20000, it is judged as an error.
-  if (parseInt(res.code / 10000) !== 2) {
-    weui.alert((res.msg || '权限错误') + '，请重新登录')
+    // if the custom code is not 20000, it is judged as an error.
+    if (parseInt(res.code / 10000) !== 2) {
+      weui.alert((res.msg || '权限错误') + '，请重新登录')
 
-    // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-    // if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
+      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+      // if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
 
-    // }
-    return Promise.reject(new Error(res.msg || 'Error'))
-  } else {
-    return res
+      // }
+      return Promise.reject(new Error(res.msg || 'Error'))
+    } else {
+      return res
+    }
+  },
+  (error) => {
+    console.log('err' + error) // for debug
+    weui.alert((error.msg || '网络错误') + '，请重新登录')
+    return Promise.reject(error)
   }
-}, error => {
-  console.log('err' + error) // for debug
-  weui.alert((error.msg || '网络错误') + '，请重新登录')
-  return Promise.reject(error)
-})
+)
 /**
  * get 请求方法
  * @param url
@@ -55,13 +61,18 @@ axios.interceptors.response.use(response => {
  */
 export function get(url, params = {}, dataType) {
   return new Promise((resolve, reject) => {
-    axios.get(url, {
-      params: params
-    }).then(response => {
-      resolve(response)
-    }, err => {
-      reject(err)
-    })
+    axios
+      .get(url, {
+        params: params,
+      })
+      .then(
+        (response) => {
+          resolve(response)
+        },
+        (err) => {
+          reject(err)
+        }
+      )
   })
 }
 /**
@@ -72,11 +83,14 @@ export function get(url, params = {}, dataType) {
  */
 export function post(url, data = {}) {
   return new Promise((resolve, reject) => {
-    axios.post(url, data).then(response => {
-      resolve(response)
-    }, err => {
-      reject(err)
-    })
+    axios.post(url, data).then(
+      (response) => {
+        resolve(response)
+      },
+      (err) => {
+        reject(err)
+      }
+    )
   })
 }
 /**
@@ -87,13 +101,18 @@ export function post(url, data = {}) {
  */
 export function _delete(url, data = {}, newUrl, dataType) {
   return new Promise((resolve, reject) => {
-    axios.delete(url, {
-      data: data
-    }).then(response => {
-      resolve(response)
-    }, err => {
-      reject(err)
-    })
+    axios
+      .delete(url, {
+        data: data,
+      })
+      .then(
+        (response) => {
+          resolve(response)
+        },
+        (err) => {
+          reject(err)
+        }
+      )
   })
 }
 /**
@@ -104,11 +123,14 @@ export function _delete(url, data = {}, newUrl, dataType) {
  */
 export function patch(url, data = {}) {
   return new Promise((resolve, reject) => {
-    axios.patch(url, data).then(response => {
-      resolve(response)
-    }, err => {
-      reject(err)
-    })
+    axios.patch(url, data).then(
+      (response) => {
+        resolve(response)
+      },
+      (err) => {
+        reject(err)
+      }
+    )
   })
 }
 /**
@@ -119,10 +141,13 @@ export function patch(url, data = {}) {
  */
 export function put(url, data = {}) {
   return new Promise((resolve, reject) => {
-    axios.put(url, data).then(response => {
-      resolve(response)
-    }, err => {
-      reject(err)
-    })
+    axios.put(url, data).then(
+      (response) => {
+        resolve(response)
+      },
+      (err) => {
+        reject(err)
+      }
+    )
   })
 }

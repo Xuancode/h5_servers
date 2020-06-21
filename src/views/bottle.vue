@@ -1,3 +1,11 @@
+<!--
+ * @Author: xuanpl
+ * @Date: 2020-06-16 08:29:15
+ * @LastEditors: xuanpl
+ * @LastEditTime: 2020-06-17 16:36:21
+ * @Description: file content
+ * @FilePath: /h5_servers/src/views/bottle.vue
+-->
 <template>
   <div class="home">
     <h1>快乐源泉小瓶子</h1>
@@ -28,12 +36,12 @@
 <script>
 // @ is an alias to /src
 
-import { mapState } from "vuex";
-import { rem2px, saveStore, setCookie } from "@/js/util";
-import Bottle from "@/components/bottle";
+import { mapState } from 'vuex'
+import { rem2px, saveStore, setCookie } from '@/js/util'
+import Bottle from '@/components/bottle'
 
 export default {
-  name: "Home",
+  name: 'Home',
   data() {
     return {
       showTip: false,
@@ -44,14 +52,14 @@ export default {
         // {text: '天气不错阿萨德的啊', number: 15, id: 99123},
         // {text: '天气不错4', number: 16, id: 998123},
         // {text: '天气不错5', number: 17, id: 99813}
-      ]
-    };
+      ],
+    }
   },
   computed: {
-    ...mapState(["deviceWidth"])
+    ...mapState(['deviceWidth']),
   },
   components: {
-    Bottle
+    Bottle,
   },
   mounted() {
     this.initData()
@@ -65,61 +73,61 @@ export default {
   methods: {
     initData() {
       this.getQuery()
-      this.$get("/api/v1/bottle", { page: 1, size: 100 }).then(
-        res => {
-          this.bottleArr = res.data.data;
+      this.$get('/v1/bottle', { page: 1, size: 100 }).then(
+        (res) => {
+          this.bottleArr = res.data.data
         },
-        err => {
-          console.log(err);
+        (err) => {
+          console.log(err)
         }
-      );
+      )
     },
     getQuery() {
       setCookie('X-token', this.$router.history.current.query.token)
       // this.$router.history.current.query
     },
     upHeart(item, index) {
-      this.$put("/api/v1/bottle/1", item).then(
-        res => {
-          this.bottleArr = res.data.data;
+      this.$put('/v1/bottle/1', item).then(
+        (res) => {
+          this.bottleArr = res.data.data
         },
-        err => {
-          console.log(err);
+        (err) => {
+          console.log(err)
         }
-      );
+      )
     },
     addBottle() {
-      this.$post("/api/v1/bottle", { text: "你的好心情", number: 0 }).then(
-        res => {
-          this.bottleArr = res.data.data;
+      this.$post('/v1/bottle', { text: '你的好心情', number: 0 }).then(
+        (res) => {
+          this.bottleArr = res.data.data
         },
-        err => {
-          console.log(err);
+        (err) => {
+          console.log(err)
         }
-      );
+      )
     },
     deletBt(id) {
-      this.$set(this.bottleArr);
-      this.$delete("/api/v1/bottle/1", { id: id }).then(
-        res => {
-          this.bottleArr = res.data.data;
+      this.$set(this.bottleArr)
+      this.$delete('/v1/bottle/1', { id: id }).then(
+        (res) => {
+          this.bottleArr = res.data.data
         },
-        err => {
-          console.log(err);
+        (err) => {
+          console.log(err)
         }
-      );
+      )
     },
     help() {
       if (this.showTip == true) {
-        return;
+        return
       }
-      this.showTip = true;
+      this.showTip = true
       setTimeout(() => {
-        this.showTip = false;
-      }, 4000);
-    }
-  }
-};
+        this.showTip = false
+      }, 4000)
+    },
+  },
+}
 </script>
 
 <style scoped>
@@ -129,7 +137,7 @@ export default {
   background-repeat: repeat;
   background-color: #f4f1cf;
   background-attachment: fixed;
-  background-image: url("/img/background.png");
+  background-image: url('/img/background.png');
   height: 100%;
 }
 .bottle_div {
@@ -149,18 +157,18 @@ export default {
 }
 
 h1 {
-    margin-top: .2rem;
-    font-size: .22rem;
-    font-weight: 500;
-    color: #008605;
-    display: inline-block;
+  margin-top: 0.2rem;
+  font-size: 0.22rem;
+  font-weight: 500;
+  color: #008605;
+  display: inline-block;
 }
 span {
-  margin-top: .24rem;
+  margin-top: 0.24rem;
   position: absolute;
-  right: .1rem;
+  right: 0.1rem;
   top: 0;
-  font-size: .14rem;
+  font-size: 0.14rem;
   color: #999;
   float: right;
 }
@@ -170,8 +178,8 @@ span {
   z-index: 1;
   background-color: #333;
   text-align: left;
-  padding: .2rem;
-  border-radius: .08rem;
+  padding: 0.2rem;
+  border-radius: 0.08rem;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -179,7 +187,7 @@ span {
 }
 .help_tip p {
   color: #fff;
-  font-size: .18rem;
-  line-height: .24rem;
+  font-size: 0.18rem;
+  line-height: 0.24rem;
 }
 </style>

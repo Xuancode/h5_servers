@@ -1,3 +1,11 @@
+/*
+ * @Author: xuanpl
+ * @Date: 2020-06-16 08:29:15
+ * @LastEditors: xuanpl
+ * @LastEditTime: 2020-06-16 20:06:12
+ * @Description: file content
+ * @FilePath: /h5_servers/src/router/index.js
+ */ 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -28,6 +36,12 @@ const routes = [
     name: 'room',
     component: () => import('../views/room/index'),
     meta: {title: '房间详情'}
+  },
+  {
+    path: '/building/add',
+    name: 'addBuilding',
+    component: () => import('../views/building/add'),
+    meta: {title: '新增公寓'}
   }
 ]
 

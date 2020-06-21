@@ -5,10 +5,10 @@
  * @LastEditTime: 2020-06-16 19:28:09
  * @Description: file content
  * @FilePath: /h5_servers/src/views/room/index.vue
---> 
+-->
 <template>
   <div class="room">
-    <div class="focus" @click="goWST" v-if="canSee==0">
+    <div class="focus" @click="goWST" v-if="canSee == 0">
       <span class="focus_text">更多房源请关注</span>
       <span class="wst_name">“横县万事通”</span>
       <div class="logo_div">
@@ -17,9 +17,10 @@
       <a
         href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzAwMTMxMzUyMQ==#wechat_redirect"
         class="weui-btn weui-btn_mini weui-btn_primary"
-      >去关注</a>
+        >去关注</a
+      >
     </div>
-    <div class="focus" @click="goWST" v-if="canSee==1">
+    <div class="focus" @click="goWST" v-if="canSee == 1">
       <span class="focus_text">更多房源请查看</span>
       <span class="wst_name">“横县万事通”</span>
       <div class="logo_div">
@@ -28,10 +29,11 @@
       <a
         href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzAwMTMxMzUyMQ==#wechat_redirect"
         class="weui-btn weui-btn_mini weui-btn_primary"
-      >去查看</a>
+        >去查看</a
+      >
     </div>
 
-    <div class="cannot_see" v-if="canSee==0">
+    <div class="cannot_see" v-if="canSee == 0">
       <div class="weui-mask weui-animate-fade-in"></div>
       <div class="weui-dialog weui-animate-fade-in">
         <div class="weui-dialog__hd">
@@ -42,11 +44,12 @@
           <a
             href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzAwMTMxMzUyMQ==#wechat_redirect"
             class="weui-dialog__btn weui-dialog__btn_primary"
-          >去关注</a>
+            >去关注</a
+          >
         </div>
       </div>
     </div>
-    <div class="pics" v-if="canSee==1">
+    <div class="pics" v-if="canSee == 1">
       <div class="pic">
         <img src="/img/room/301590637566_.pic.jpg" alt />
       </div>
@@ -73,7 +76,7 @@ export default {
     return {
       hasFocus: false,
       canSee: 2,
-      loadingEle: null
+      loadingEle: null,
     }
   },
   computed: {
@@ -91,7 +94,7 @@ export default {
     },
     async canIRead() {
       this.loadingEle = this.$weui.loading('loading', {
-        className: 'custom-classname'
+        className: 'custom-classname',
       })
       setTimeout(() => {
         this.loadingEle.hide()
@@ -99,7 +102,7 @@ export default {
 
       const data = { type: '210', countType: '211' }
       const _this = this
-      this.$get('/api/v1/room/canSee', data).then(res => {
+      this.$get('/v1/room/canSee', data).then((res) => {
         this.loadingEle.hide()
         if (res.code === 20040) {
           // 需要关注
@@ -113,8 +116,8 @@ export default {
           this.canSee = 1
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
